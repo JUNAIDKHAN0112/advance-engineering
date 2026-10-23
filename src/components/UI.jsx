@@ -158,7 +158,7 @@ export function ProductCard({ product, index = 0 }) {
       <div className="product-card-image">
         <img
           src={`/media/${product.image}.webp`}
-          alt={`${product.name} — manufacturing and plant reference`}
+          alt={`Illustrative food-processing equipment image for ${product.name}` }
           loading="lazy"
           width="720"
           height="600"
