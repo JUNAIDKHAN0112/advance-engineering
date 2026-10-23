@@ -157,8 +157,8 @@ export function ProductCard({ product, index = 0 }) {
     <Link to={`/${product.slug}`} className="product-card">
       <div className="product-card-image">
         <img
-          src={`/media/${product.image}.webp`}
-          alt={`Illustrative food-processing equipment image for ${product.name}` }
+          src={`/product-images/${product.slug}.svg`}
+          alt={`Concept illustration of ${product.name}` }
           loading="lazy"
           width="720"
           height="600"
