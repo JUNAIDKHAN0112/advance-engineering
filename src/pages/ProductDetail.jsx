@@ -54,13 +54,13 @@ export default function ProductDetail({ product }) {
             </div>
             <figure className="product-hero-photo">
               <img
-                src={`/media/${product.image}.webp`}
-                alt={`Illustrative equipment imagery for ${product.name}` }
+                src={`/product-images/${product.slug}.svg`}
+                alt={`Concept illustration of ${product.name}` }
                 width="960"
                 height="1000"
               />
               <figcaption>
-                ILLUSTRATIVE EQUIPMENT IMAGE / CONFIGURATION CONFIRMED ON ENQUIRY
+                CONCEPT ILLUSTRATION / ACTUAL MACHINE SPECIFICATIONS ON ENQUIRY
               </figcaption>
             </figure>
           </div>
