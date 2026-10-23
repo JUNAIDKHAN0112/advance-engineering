@@ -154,7 +154,7 @@ export default function Navbar() {
                     </div>
                     <div className="nav-dropdown-footer">
                       <Link to="/machines" className="text-link">
-                        Explore all 10 purpose-built machines
+                        Explore the complete machinery catalogue
                         <Arrow />
                       </Link>
                     </div>
