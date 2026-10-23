@@ -81,7 +81,7 @@ export default function Machines() {
             </div>
           )}
           <p className="image-note">
-            Equipment imagery is illustrative, not a photograph of each listed model.
+            Machine visuals are original conceptual illustrations, not photographs of manufactured models.
             All product names and descriptions are presented for National Engineering Works.
             Capacity, dimensions, motors and available configurations are confirmed on enquiry.
           </p>
