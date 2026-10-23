@@ -254,6 +254,16 @@ main:focus {
   color: #52677f;
   stroke-width: 1.15;
 }
+.brand-logo {
+  width: 68px;
+  height: 68px;
+  object-fit: contain;
+  filter: saturate(0.92);
+}
+.brand--footer .brand-logo {
+  width: 72px;
+  height: 72px;
+}
 .brand > span {
   font-family: var(--heading);
   font-size: 23px;
