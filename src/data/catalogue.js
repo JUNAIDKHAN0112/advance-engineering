@@ -1,3 +1,4 @@
+import { expandedProducts } from "./expandedProducts";
 export const company = {
   name: "National Engineering Works",
   email: "nationalengineering973@gmail.com",
@@ -6,7 +7,7 @@ export const company = {
   maps: "https://www.google.com/maps/search/?api=1&query=C-162+Chincholi+MIDC+Solapur+413255",
 };
 
-export const products = [
+export const originalProducts = [
   {
     slug: "destoner",
     name: "De-stoner",
@@ -228,6 +229,7 @@ export const products = [
     ],
   },
 ];
+export const products = [...originalProducts, ...expandedProducts];
 export const categories = [
   "All machinery",
   ...new Set(products.map((product) => product.category)),
