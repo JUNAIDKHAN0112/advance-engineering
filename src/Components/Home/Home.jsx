@@ -126,7 +126,7 @@ export default function Home() {
             )}
           </div>
           <p className="image-note">
-            Photography from our machinery and plant projects. Final equipment
+            Illustrative equipment photography. Final equipment
             configuration is confirmed for each enquiry.
           </p>
         </div>
