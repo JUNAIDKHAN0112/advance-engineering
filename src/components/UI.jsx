@@ -28,20 +28,14 @@ export function Brand({ compact = false }) {
       className={`brand ${compact ? "brand--footer" : ""}`}
       aria-label="National Engineering Works home"
     >
-      <svg
-        className="brand-mark"
-        width="40"
-        height="42"
-        viewBox="0 0 40 42"
-        fill="none"
-        aria-hidden="true"
-      >
-        <path d="M20 2 37 11.5v19L20 40 3 30.5v-19L20 2Z" />
-        <path d="M12 29V13l16 16V13M20 2v8M3 11.5l7 4M37 30.5l-7-4" />
-      </svg>
-      <span>
-        NATIONAL<span>ENGINEERING WORKS</span>
-      </span>
+      <img
+        className="brand-mark brand-logo"
+        src="/Images/national-engineering-works-logo.png"
+        alt="National Engineering Works"
+        width={compact ? 72 : 68}
+        height={compact ? 72 : 68}
+        loading={compact ? "lazy" : "eager"}
+      />
     </Link>
   );
 }
