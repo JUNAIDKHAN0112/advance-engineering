@@ -138,7 +138,7 @@ export default function Navbar() {
                         >
                           <div className="dropdown-machine-img">
                             <img
-                              src={`/media/${product.image}.webp`}
+                              src={`/product-images/${product.slug}.svg`}
                               alt={product.name}
                               width="50"
                               height="40"
