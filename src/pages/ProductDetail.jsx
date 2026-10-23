@@ -1,3 +1,4 @@
+import { productImageSrc, productImageAlt } from "../data/productPhotoRegistry";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import {
@@ -54,8 +55,12 @@ export default function ProductDetail({ product }) {
             </div>
             <figure className="product-hero-photo">
               <img
-                src={`/product-images/${product.slug}.svg`}
-                alt={`Concept illustration of ${product.name}` }
+                src={productImageSrc(product)}
+                onError={(event) => {
+                  const fallback = `/product-images/${product.slug}.svg`;
+                  if (!event.currentTarget.src.endsWith(fallback)) event.currentTarget.src = fallback;
+                }}
+                alt={productImageAlt(product)}
                 width="960"
                 height="1000"
               />

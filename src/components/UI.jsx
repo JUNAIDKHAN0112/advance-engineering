@@ -1,3 +1,4 @@
+import { productImageSrc, productImageAlt } from "../data/productPhotoRegistry";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
@@ -157,8 +158,12 @@ export function ProductCard({ product, index = 0 }) {
     <Link to={`/${product.slug}`} className="product-card">
       <div className="product-card-image">
         <img
-          src={`/product-images/${product.slug}.svg`}
-          alt={`Concept illustration of ${product.name}` }
+          src={productImageSrc(product)}
+                onError={(event) => {
+                  const fallback = `/product-images/${product.slug}.svg`;
+                  if (!event.currentTarget.src.endsWith(fallback)) event.currentTarget.src = fallback;
+                }}
+          alt={productImageAlt(product)}
           loading="lazy"
           width="720"
           height="600"

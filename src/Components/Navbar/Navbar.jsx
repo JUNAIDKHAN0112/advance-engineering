@@ -1,3 +1,4 @@
+import { productImageSrc } from "../../data/productPhotoRegistry";
 import { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { Arrow, Brand } from "../../components/UI";
@@ -138,7 +139,11 @@ export default function Navbar() {
                         >
                           <div className="dropdown-machine-img">
                             <img
-                              src={`/product-images/${product.slug}.svg`}
+                              src={productImageSrc(product)}
+                onError={(event) => {
+                  const fallback = `/product-images/${product.slug}.svg`;
+                  if (!event.currentTarget.src.endsWith(fallback)) event.currentTarget.src = fallback;
+                }}
                               alt={product.name}
                               width="50"
                               height="40"
