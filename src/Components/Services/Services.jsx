@@ -1,123 +1,101 @@
-
-import { FaTools } from "react-icons/fa";
-import { MdConstruction } from "react-icons/md";
-import { FcEngineering } from "react-icons/fc";
-import { FcIdea } from "react-icons/fc";
-const Services = () => {
+import { Link } from "react-router-dom";
+import { Arrow, Eyebrow, PageIntro, ProjectCTA } from "../../components/UI";
+import { services } from "../../data/catalogue";
+export default function Services() {
   return (
-    <div className="bg-gray-300 py-12 px-6 md:px-12">
-      <div className="max-w-6xl mx-auto">
-        {/* Section Title */}
-        <div className="text-center mb-10">
-        <h2 className="text-2xl text-left  mx-5 py-2 md:text-4xl   border-b-2 border-green-600 mb-4">
-        Our Professional Services
-          </h2>
-          <p className="text-lg text-gray-600">
-            Delivering excellence with tailored solutions across multiple
-            domains to meet your unique needs. Explore our specialized services
-            below.
-          </p>
-        </div>
-
-        {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Repair Services */}
-          <div className="bg-gray-100 shadow-lg rounded-lg p-8 md:p-10">
-            <div className="flex items-start mb-6">
-              <div className="flex-shrink-0 bg-blue-100 p-3 rounded-full">
-              <FaTools className="text-blue-700  " />{" "}
-              </div>
-              <h2 className="text-2xl font-medium border-b border-red-600 pb-2 text-gray-900 ml-4">
-                Repair Services
-              </h2>
-            </div>
-            <p className="text-gray-700 mb-6">
-              We specialize in restoring equipment to optimal performance. Using
-              advanced diagnostics, certified spare parts, and expert
-              technicians, we ensure minimal downtime and reliable operations.
-            </p>
-            <ul className="list-disc list-inside space-y-2 text-gray-700">
-              <li>Comprehensive diagnostics for precision repairs.</li>
-              <li>Skilled technicians with industry expertise.</li>
-              <li>Quick turnaround times with high-quality results.</li>
-              <li>Custom solutions tailored to your requirements.</li>
-            </ul>
-          </div>
-
-          {/* Design & Construction */}
-          <div className="bg-gray-100 shadow-lg rounded-lg p-8 md:p-10">
-            <div className="flex items-start mb-6">
-              <div className="flex-shrink-0 bg-green-100 p-3 rounded-full">
-              <MdConstruction className="text-xl text-green-500" />
-              </div>
-              <h2 className="text-2xl font-medium  border-b border-red-600 pb-2 text-gray-900 ml-4">
-                Design & Construction
-              </h2>
-            </div>
-            <p className="text-gray-700 mb-6">
-              Transforming visions into reality, we provide innovative designs
-              and robust construction solutions. Our team ensures functionality,
-              efficiency, and aesthetic appeal in every project.
-            </p>
-            <ul className="list-disc list-inside space-y-2 text-gray-700">
-              <li>Custom designs tailored to your specifications.</li>
-              <li>Use of cutting-edge technology for precision.</li>
-              <li>
-                Experienced professionals ensuring durability and quality.
-              </li>
-              <li>On-time project delivery with complete transparency.</li>
-            </ul>
-          </div>
-
-          {/* Installation Services */}
-          <div className="bg-gray-100 shadow-lg rounded-lg p-8 md:p-10">
-            <div className="flex items-start mb-6">
-              <div className="flex-shrink-0 text-xl  bg-red-100 p-3 rounded-full">
-              <FcEngineering />
-              </div>
-              <h2 className="text-2xl  border-b border-red-600 pb-2 font-medium text-gray-900 ml-4">
-                Installation Services
-              </h2>
-            </div>
-            <p className="text-gray-700 mb-6">
-              Seamless installation services for complex systems, ensuring
-              safety, efficiency, and adherence to industry standards. Our goal
-              is to simplify your setup process with professionalism.
-            </p>
-            <ul className="list-disc list-inside space-y-2 text-gray-700">
-              <li>Precision installation with minimal disruption.</li>
-              <li>Certified professionals ensuring compliance.</li>
-              <li>Comprehensive testing and quality assurance.</li>
-              <li>Support and guidance for post-installation operations.</li>
-            </ul>
-          </div>
-
-          {/* Consultation Services */}
-          <div className="bg-gray-100 shadow-lg rounded-lg p-8 md:p-10">
-            <div className="flex items-start mb-6">
-              <div className="flex-shrink-0 text-2xl bg-yellow-100 p-3 rounded-full">
-              <FcIdea />
-              </div>
-              <h2 className="text-2xl  border-b border-red-600 pb-2 font-medium text-gray-900 ml-4">
-                Consultation Services
-              </h2>
-            </div>
-            <p className="text-gray-700 mb-6">
-              Gain actionable insights and strategic planning from our experts.
-              We provide consultation services tailored to your challenges,
-              helping you achieve operational excellence and cost efficiency.
-            </p>
-            <ul className="list-disc list-inside space-y-2 text-gray-700">
-              <li>In-depth analysis of your unique requirements.</li>
-              <li>Practical solutions for enhanced efficiency.</li>
-              <li>Expert guidance for long-term success.</li>
-              <li>Proven strategies to minimize costs and maximize ROI.</li>
-            </ul>
-          </div>
+    <>
+      <PageIntro
+        eyebrow="OUR EXPERTISE"
+        title={
+          <>
+            From the first idea.
+            <br />
+            <em>For the long run.</em>
+          </>
+        }
+      >
+        A considered approach to planning, manufacturing, installation, and
+        support — built around the way your plant needs to work.
+      </PageIntro>
+      <div className="container services-cover">
+        <img
+          src="/media/craft.webp"
+          alt="Plant structures and interconnected bulk material handling systems"
+          width="1280"
+          height="720"
+        />
+        <div className="services-cover-caption">
+          <span>CONNECTED THINKING.</span>
+          <span>FROM DRAWING TO DELIVERY.</span>
         </div>
       </div>
-    </div>
+      <section className="section">
+        <div className="container service-list">
+          {services.map((service) => (
+            <article key={service.number}>
+              <span className="service-number">{service.number}</span>
+              <div>
+                <Eyebrow>{service.short}</Eyebrow>
+                <h2>{service.title}</h2>
+                <p>{service.description}</p>
+              </div>
+              <div className="service-scope">
+                <span className="small-label">THE FOCUS</span>
+                <ul>
+                  {service.details.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+                <Link to="/quote" className="text-link">
+                  Let’s discuss
+                  <Arrow diagonal />
+                </Link>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+      <section className="process-section section">
+        <div className="container">
+          <Eyebrow>THE WAY FORWARD</Eyebrow>
+          <h2>
+            A clear path.
+            <br />
+            <em>A shared ambition.</em>
+          </h2>
+          <div className="process-grid">
+            {[
+              [
+                "01",
+                "Tell us your requirement",
+                "Share your material, process, and the outcome you have in mind.",
+              ],
+              [
+                "02",
+                "Shape the solution",
+                "We review the equipment, configuration, and installation considerations together.",
+              ],
+              [
+                "03",
+                "Agree the details",
+                "Receive a quotation with the scope and commercial terms for your project.",
+              ],
+              [
+                "04",
+                "Build the next chapter",
+                "Move forward with manufacturing, installation, and support as agreed.",
+              ],
+            ].map(([number, title, copy]) => (
+              <article key={number}>
+                <span>{number}</span>
+                <h3>{title}</h3>
+                <p>{copy}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+      <ProjectCTA />
+    </>
   );
-};
-
-export default Services;
+}
