@@ -3781,3 +3781,28 @@ em {
     font-size: 9px;
   }
 }
+
+/* Expanded National Engineering catalogue */
+.catalogue-search-bar{display:flex;align-items:end;justify-content:space-between;gap:36px;padding:58px 0 28px}
+.catalogue-search-bar h2{font-size:clamp(30px,3vw,46px);margin-top:12px}
+.catalogue-search-label{display:flex;flex-direction:column;gap:10px;width:min(100%,390px);font-size:12px;font-weight:600;color:var(--ink)}
+.catalogue-search-label input{width:100%;padding:16px 18px;border:1px solid var(--line);background:var(--paper);color:var(--ink);outline-offset:3px;border-radius:0}
+.catalogue-search-label input:focus{border-color:var(--accent)}
+.catalogue-search-label input::placeholder{color:#7c8da0}
+.catalogue-sort{display:flex;align-items:center;gap:10px;white-space:nowrap}
+.catalogue-sort select{min-width:130px;padding:10px 12px;border:1px solid var(--line);background:white;color:var(--ink);border-radius:0}
+.catalogue-results{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:0 0 28px}
+.catalogue-empty{padding:80px 24px;text-align:center;background:var(--surface);border:1px solid var(--line)}
+.catalogue-empty h3{font-size:27px;font-weight:700;margin-bottom:8px}
+.catalogue-empty p{color:var(--muted);margin-bottom:20px}
+.catalogue-empty button{padding:12px 20px;border:0;background:var(--dark);color:#fff}
+.catalogue-grid .product-card-image{background:#cfdeec}
+.catalogue-grid .product-card h3{font-size:clamp(24px,2.2vw,32px)}
+@media (max-width:760px){
+  .catalogue-search-bar{display:block;padding-top:36px}
+  .catalogue-search-label{margin-top:24px}
+  .catalogue-toolbar{align-items:flex-start;flex-direction:column;gap:20px}
+  .category-filters{gap:6px}
+  .category-filters button{font-size:11px;padding:9px 11px}
+  .catalogue-results{flex-wrap:wrap}
+}

@@ -28,22 +28,16 @@ async function render(element) {
     });
   });
 }
+const { products } = await server.ssrLoadModule("/src/data/catalogue.js");
+assert.equal(products.length, 63, "Expanded machinery catalogue should include all 63 entries");
+assert.equal(new Set(products.map((product) => product.slug)).size, products.length, "Machine URLs must remain unique");
 const paths = [
   "/",
   "/about",
   "/services",
   "/machines",
   "/quote",
-  "/destoner",
-  "/elevator",
-  "/cyclone",
-  "/fatka",
-  "/buff",
-  "/dal",
-  "/conveyor",
-  "/blower",
-  "/rotary",
-  "/rill",
+  ...products.map((product) => `/${product.slug}`),
 ];
 for (const path of paths) {
   test(`${path} renders one main landmark, one page heading and one footer`, async () => {
@@ -96,4 +90,15 @@ test("unrecognised URLs offer an intentional recovery page", async () => {
   );
   assert.ok(html.includes("Page not found"));
   assert.ok(html.includes("Return home"));
+});
+
+test("expanded catalogue contains original, unbranded listings and preserved original products", () => {
+  assert.equal(products.filter((item) => item.category === "Turnkey plants").length, 12);
+  for (const product of products) {
+    assert.ok(product.slug && product.name && product.summary && product.description);
+    assert.ok(product.applications.length > 0 && product.considerations.length > 0);
+    assert.ok(!/nice engineering/i.test(JSON.stringify(product)));
+  }
+  assert.ok(products.some((product) => product.slug === "destoner"));
+  assert.ok(products.some((product) => product.slug === "pulse-processing-plant"));
 });

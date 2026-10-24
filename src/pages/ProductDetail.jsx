@@ -1,3 +1,4 @@
+import { productImageSrc, productImageAlt } from "../data/productPhotoRegistry";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import {
@@ -54,13 +55,17 @@ export default function ProductDetail({ product }) {
             </div>
             <figure className="product-hero-photo">
               <img
-                src={`/media/${product.image}.webp`}
-                alt={`${product.name} — machinery and installation reference from our projects`}
+                src={productImageSrc(product)}
+                onError={(event) => {
+                  const fallback = `/product-images/${product.slug}.svg`;
+                  if (!event.currentTarget.src.endsWith(fallback)) event.currentTarget.src = fallback;
+                }}
+                alt={productImageAlt(product)}
                 width="960"
                 height="1000"
               />
               <figcaption>
-                PROJECT PHOTOGRAPHY / CONFIGURATION CONFIRMED ON ENQUIRY
+                CONCEPT ILLUSTRATION / ACTUAL MACHINE SPECIFICATIONS ON ENQUIRY
               </figcaption>
             </figure>
           </div>
