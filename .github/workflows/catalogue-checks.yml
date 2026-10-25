@@ -1,0 +1,26 @@
+name: Catalogue checks
+on:
+  pull_request:
+  push:
+    branches: [catalog/national-machinery-expansion-20261023]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: catalogue-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: npm test
+      - run: node scripts/generate-sitemap.mjs
+      - run: git diff --exit-code -- public/sitemap.xml
+      - run: npm run build

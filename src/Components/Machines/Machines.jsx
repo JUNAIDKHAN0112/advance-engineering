@@ -1,93 +1,32 @@
-import { useMemo, useState } from "react";
-import { PageIntro, ProductCard, ProjectCTA } from "../../components/UI";
-import { categories, products } from "../../data/catalogue";
-
+import { useMemo, useState } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
+import { PageIntro, ProductCard, ProjectCTA } from '../../components/UI';
+import { categories, products, filterProducts } from '../../data/catalogue.js';
+import { categoryDefinitions } from '../../data/catalogueScope.js';
 export default function Machines() {
-  const [category, setCategory] = useState("All machinery");
-  const [query, setQuery] = useState("");
-  const [sort, setSort] = useState("featured");
+  const [params, setParams] = useSearchParams();
+  const category = categoryDefinitions.find(c => c.slug === params.get('category'))?.name || 'All machinery';
+  const query = params.get('q') || '';
+  const [sort, setSort] = useState('featured');
   const filtered = useMemo(() => {
-    const search = query.trim().toLowerCase();
-    const matches = products.filter((product) =>
-      (category === "All machinery" || product.category === category) &&
-      (!search || [product.name, product.category, product.summary, ...product.applications]
-        .join(" ").toLowerCase().includes(search))
-    );
-    return sort === "alphabetical"
-      ? [...matches].sort((a, b) => a.name.localeCompare(b.name))
-      : matches;
-  }, [category, query, sort]);
-  return (
-    <>
-      <PageIntro
-        eyebrow="NATIONAL ENGINEERING WORKS / PRODUCT CATALOGUE"
-        title={<>Industrial machinery.<br /><em>Made for your process.</em></>}
-      >
-        Explore grain cleaning, dal milling, flour processing, conveying, dust control,
-        inspection, packaging and integrated plant solutions. Configurations are
-        discussed for your material and production requirements.
-      </PageIntro>
-      <section className="catalogue-section">
-        <div className="container">
-          <div className="catalogue-search-bar">
-            <div>
-              <span className="small-label">EXPLORE OUR CAPABILITIES</span>
-              <h2>Find the right equipment.</h2>
-            </div>
-            <label className="catalogue-search-label">
-              <span>Search machinery</span>
-              <input
-                type="search"
-                value={query}
-                onChange={(event) => setQuery(event.target.value)}
-                placeholder="Search by machine, material, process…"
-                aria-label="Search machinery"
-              />
-            </label>
-          </div>
-          <div className="catalogue-toolbar">
-            <div className="category-filters" role="group" aria-label="Filter machinery by application">
-              {categories.map((item) => (
-                <button type="button" key={item} aria-pressed={category === item}
-                  className={category === item ? "active" : ""}
-                  onClick={() => setCategory(item)}>
-                  {item}
-                </button>
-              ))}
-            </div>
-            <label className="catalogue-sort">
-              <span className="small-label">SORT</span>
-              <select aria-label="Sort products" value={sort} onChange={(event) => setSort(event.target.value)}>
-                <option value="featured">Featured</option>
-                <option value="alphabetical">Name A–Z</option>
-              </select>
-            </label>
-          </div>
-          <div className="catalogue-results">
-            <span className="result-count" role="status">{filtered.length} MACHINES & SOLUTIONS</span>
-            <span className="small-label">APPLICATION-LED ENGINEERING</span>
-          </div>
-          {filtered.length ? (
-            <div className="catalogue-grid">
-              {filtered.map((product) => (
-                <ProductCard key={product.slug} product={product} index={products.indexOf(product)} />
-              ))}
-            </div>
-          ) : (
-            <div className="catalogue-empty">
-              <h3>No machinery found.</h3>
-              <p>Try a different product, process or material name.</p>
-              <button type="button" onClick={() => { setQuery(""); setCategory("All machinery"); }}>Clear search and filters</button>
-            </div>
-          )}
-          <p className="image-note">
-            Machine visuals are original conceptual illustrations, not photographs of manufactured models.
-            All product names and descriptions are presented for National Engineering Works.
-            Capacity, dimensions, motors and available configurations are confirmed on enquiry.
-          </p>
-        </div>
-      </section>
-      <ProjectCTA />
-    </>
-  );
+    const matches = filterProducts(category, query);
+    return sort === 'alphabetical' ? [...matches].sort((a,b) => a.name.localeCompare(b.name)) : matches;
+  }, [category,query,sort]);
+  function setFilter(key, value) {
+    const next = new URLSearchParams(params);
+    if (value) next.set(key, value); else next.delete(key);
+    setParams(next, { replace: true });
+  }
+  return <>
+    <PageIntro eyebrow="NATIONAL ENGINEERING WORKS / MACHINERY" title={<>Equipment for your material.<br /><em>A process built around it.</em></>}>Explore our selected range for cleaning, milling, conveying, aspiration and five processing-plant applications.</PageIntro>
+    <section className="catalogue-section"><div className="container">
+      <div className="catalogue-search-bar"><div><span className="small-label">{products.length} MACHINES &amp; SOLUTIONS</span><h2>Find the right equipment.</h2><Link className="text-link" to="/processes">Explore processing guides &rarr;</Link></div>
+        <label className="catalogue-search-label"><span>Search machinery</span><input type="search" value={query} onChange={e => setFilter('q', e.target.value)} placeholder="Machine, material or application" /></label></div>
+      <div className="catalogue-toolbar"><div className="category-filters" role="group" aria-label="Filter machinery by application">{categories.map(name => <button type="button" key={name} aria-pressed={category === name} className={category === name ? 'active' : ''} onClick={() => setFilter('category', categoryDefinitions.find(c => c.name === name)?.slug || '')}>{name}</button>)}</div>
+        <label className="catalogue-sort"><span>Sort</span><select value={sort} onChange={e => setSort(e.target.value)}><option value="featured">Featured</option><option value="alphabetical">Name A-Z</option></select></label></div>
+      <div className="catalogue-results"><span className="result-count" role="status">{filtered.length} MACHINES &amp; SOLUTIONS</span>{category !== 'All machinery' && <Link className="text-link" to={`/machines/category/${categoryDefinitions.find(c => c.name === category).slug}`}>About this category &rarr;</Link>}</div>
+      {filtered.length ? <div className="catalogue-grid">{filtered.map(product => <ProductCard key={product.slug} product={product} index={products.indexOf(product)} />)}</div> : <div className="catalogue-empty"><h3>No machinery found.</h3><p>Try a different machine name, material or category.</p><button type="button" onClick={() => setParams({}, { replace: true })}>Clear search and filters</button></div>}
+      <p className="image-note">Digital renders and concept illustrations are labelled on product pages. Actual model details and configurations are confirmed on enquiry; images are never substituted between different machines.</p>
+    </div></section><ProjectCTA />
+  </>;
 }
