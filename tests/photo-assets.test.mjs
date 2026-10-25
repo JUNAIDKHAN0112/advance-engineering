@@ -14,7 +14,7 @@ const hash = (buffer) => createHash("sha256").update(buffer).digest("hex");
 // An empty photo folder is acceptable while work is still in the draft PR.
 // Publishing status is NOT: every ready product requires its checked asset.
 test("every photo has one unique machine, source and intended output", () => {
-  assert.equal(productPhotoRegistry.length, 10);
+  assert.equal(productPhotoRegistry.length, 13);
   const unique = (selector) => new Set(productPhotoRegistry.map(selector)).size;
   assert.equal(unique((p) => p.slug), productPhotoRegistry.length, "product slug reused");
   assert.equal(unique((p) => p.machine), productPhotoRegistry.length, "machine identity reused");
@@ -25,6 +25,7 @@ test("every photo has one unique machine, source and intended output", () => {
     assert.match(item.sourceSha256, /^[0-9a-f]{64}$/);
     assert.match(item.assetSha256, /^[0-9a-f]{64}$/);
     assert.ok(["staged", "ready"].includes(item.status));
+    if (item.kind === "render") assert.ok(["confirmed", "provisional"].includes(item.identity));
     assert.ok(existsSync(path.join(root,"public","product-images",`${item.slug}.svg`)),
       `missing fallback SVG for ${item.slug}`);
     if (item.status === "staged") {

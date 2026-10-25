@@ -26,3 +26,15 @@ unique fallback SVG concept illustrations; **never reuse another machine's photo
 Source shapes are preserved. Brand colour accent #5197a8; neutral #c9c9c9;
 white studio-like background; 'National Engineering' watermark outside the machine.
 The pack is for a provisional catalogue, not proof of the provenance of each photo.
+
+## Additional machine renders (25 October 2026)
+
+Three distinct, brand-free digital product renders are now mapped as:
+
+- `rill.webp` — Rill Machine (customer identified)
+- `cumin-stick-cutter.webp` — Cumin Stick Cutter (customer identified)
+- `reel-machine.webp` — Reel Screening Machine (tentative inference from exposed perforated screen drum; customer has **not** confirmed identity)
+
+These are AI-assisted digital renders based on supplied reference images, **not actual photographs** of manufactured machinery. The new images use white-background catalogue presentation, teal #5197A8, grey #C9C9C9 and National Engineering watermark. They preserve machine silhouettes but must not be treated as certified product specifications.
+
+Do not reuse any product image for another model. The reel-machine source identity must be confirmed before portraying that render as a product reference beyond the clearly marked illustrative designation. The image source material includes competitor-branded samples; clarify permission to use the visual reference material commercially before deploying to a public site.

@@ -1,4 +1,4 @@
-import { productImageSrc, productImageAlt } from "../data/productPhotoRegistry";
+import { productImageSrc, productImageAlt, productImageCaption } from "../data/productPhotoRegistry";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import {
@@ -65,7 +65,7 @@ export default function ProductDetail({ product }) {
                 height="1000"
               />
               <figcaption>
-                CONCEPT ILLUSTRATION / ACTUAL MACHINE SPECIFICATIONS ON ENQUIRY
+                {productImageCaption(product)}
               </figcaption>
             </figure>
           </div>

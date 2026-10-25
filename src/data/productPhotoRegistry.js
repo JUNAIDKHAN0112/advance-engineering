@@ -81,6 +81,36 @@ export const productPhotoRegistry = [
     "sourceSha256": "2df0b9cbe1cde54369cd1dec6099414e220710ab300a9fb871223befb93549dd",
     "assetSha256": "bad8a30a48b9bbb286c49f2c07a9b89b37a9f9ff0f8e143f17853136ae4775e6",
     "status": "ready"
+  },
+  {
+    "slug": "rill",
+    "machine": "Rill machine",
+    "sourceFile": "Screenshot 2026-10-25 at 12.32.26 PM.png",
+    "sourceSha256": "f5322b3c36be0ba6144c30679c931e12a216638148cc548c1839193b855ac6b2",
+    "assetSha256": "8d52751157eb5968514404d28f5dc9783fa58e11d8f1bb91d47ea0c5b205cce5",
+    "kind": "render",
+    "status": "ready",
+    "identity": "confirmed"
+  },
+  {
+    "slug": "cumin-stick-cutter",
+    "machine": "Cumin Stick Cutter",
+    "sourceFile": "Screenshot 2026-10-25 at 12.33.38 PM.png",
+    "sourceSha256": "a423576aaf139bcbad0dbe515d2b896a94ecba07d9f84b22b261a997ab460f00",
+    "assetSha256": "5cae9b38d6a42bd4a79d62f14ff6ac1c56c8b61e0cd6876dee372898758bd971",
+    "kind": "render",
+    "status": "ready",
+    "identity": "confirmed"
+  },
+  {
+    "slug": "reel-machine",
+    "machine": "Reel Screening Machine",
+    "sourceFile": "Screenshot 2026-10-25 at 12.44.37 PM.png",
+    "sourceSha256": "6d781821cf6f889209dafe7c61e2992b2feb45cc3d99a8bdbb85a9bd7e17e095",
+    "assetSha256": "54c4fd4023a51f998cff9db85a1b7574365330752cca7735e6f3e8f0dd1bb47a",
+    "kind": "render",
+    "status": "ready",
+    "identity": "provisional"
   }
 ];
 
@@ -95,7 +125,18 @@ export function productImageSrc(product) {
 }
 
 export function productImageAlt(product) {
-  return publishedSlugs.has(product.slug)
-    ? `Product reference photograph of ${product.name}`
-    : `Concept illustration of ${product.name}`;
+  const item = productPhotoRegistry.find((photo) => photo.slug === product.slug && photo.status === "ready");
+  if (!item) return `Concept illustration of ${product.name}`;
+  if (item.kind === "render") return `Illustrative digital render of ${product.name}`;
+  return `Product reference photograph of ${product.name}`;
+}
+
+export function productImageCaption(product) {
+  const item = productPhotoRegistry.find((photo) => photo.slug === product.slug && photo.status === "ready");
+  if (!item) return "CONCEPT ILLUSTRATION / ACTUAL MACHINE SPECIFICATIONS ON ENQUIRY";
+  if (item.kind === "render" && item.identity === "provisional")
+    return "ILLUSTRATIVE RENDER / MACHINE IDENTIFICATION TO BE CONFIRMED";
+  if (item.kind === "render")
+    return "ILLUSTRATIVE DIGITAL RENDER / CONFIGURATION CONFIRMED ON ENQUIRY";
+  return "PRODUCT REFERENCE IMAGE / CONFIGURATION CONFIRMED ON ENQUIRY";
 }
